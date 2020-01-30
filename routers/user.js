@@ -14,6 +14,10 @@ router.get('/:id', userController.findOne)
 router.get('/:id/play', userController.playingMe)
 router.post('/:id/play', userController.findHero)
 
+router.get('/:id/list', userController.getAll)
+
+router.get('/:idUser/:idHero/remove', userController.removeHero)
+
 
 
 

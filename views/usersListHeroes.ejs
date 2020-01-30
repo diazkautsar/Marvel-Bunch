@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <center>
+        <h1><%= dataUser.name %></h1>
+        
+        <% if (heroes.length > 0) { %>
+            <h2>Ini adalah koleksi Super Hero Mu</h2>
+            <table border="1" style="text-align:center" >
+                <tr>
+                    <th>No.</th>
+                    <th>Name Hero</th>
+                    <th>Photo</th>
+                    <th>Action</th>
+                </tr>
+                <% let no = 0;
+                heroes.forEach(data => {
+                    no++ %>
+                    <tr>
+                        <td> <%= no %> </td>
+                        <td> <%= data.Hero.name %> </td>
+                        <td> <img src="<%= data.Hero.link_image %>" style="width: 100px; height: 100px;"> </td>
+                        <td>
+                            <a href="/users/<%= dataUser.id %>/<%= data.Hero.id %>/remove" onclick="return confirm('Are You Sure Remove This Hero')" >Remove</a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </table>
+            <h1><%= heroes[0].name %></h1>
+        <% }  else { %>
+            <h2>Maaf Kamu Belum Mempunyai Koleksi Hero</h2>
+        <% } %>
+    </center>
+    
+</body>
+</html>

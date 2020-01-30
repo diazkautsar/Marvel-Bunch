@@ -108,6 +108,39 @@ class UserController {
                 res.send(err)
             })
     }
+
+    static getAll(req, res) {
+        let id = req.params.id
+        let dataUser = ''
+        User.findByPk(id)
+            .then(function(data) {
+                dataUser = data
+                return UserHero.findAll({
+                    include : [ Hero ],
+                    where : {
+                        UserId : id
+                    }
+                })
+            })
+            .then(function(heroes) {
+                console.log(heroes)
+                res.render('usersListHeroes', {dataUser, heroes})
+            })
+            .catch(function(err) {
+                res.send(err)
+            })
+    }
+
+    static removeHero(req, res) {
+        let idUser = req.params.idUser
+        let idHero = req.params.idHero
+        UserHero.destroy({
+            where : {HeroId : idHero}
+        })
+        .then(function(data) {
+            res.redirect(`/users/${idUser}/list`)
+        })
+    }
 }
 
 module.exports = UserController

@@ -12,6 +12,7 @@ router.post('/login', userController.login)
 router.get('/:id', userController.findOne)
 
 router.get('/:id/play', userController.playingMe)
+router.post('/:id/play', userController.findHero)
 
 
 

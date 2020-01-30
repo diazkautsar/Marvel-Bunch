@@ -1,4 +1,4 @@
-const { User } = require('../models')
+const { User, Hero, UserHero } = require('../models')
 
 class UserController {
     static formRegister(req, res) {
@@ -53,6 +53,32 @@ class UserController {
                 res.send(err)
             })
 
+    }
+
+    static findOne(req, res) {
+        let id = req.params.id
+        let dataUser = ''
+        User.findByPk(id)
+            .then(function(data) {
+                dataUser = data
+                return UserHero.findAll({
+                    include : [ Hero ],
+                    where : {
+                        UserId : id
+                    }
+                })
+            })
+            .then(function(heroes) {
+                res.render('userPage', {dataUser, heroes})
+                // res.send({user : dataUser, heroes : heroes})
+            })
+            .catch(function(err) {
+                res.send(err)
+            })
+    }
+
+    static playingMe(req, res) {
+        res.render('pageToPlay')
     }
 }
 

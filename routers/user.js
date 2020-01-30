@@ -4,10 +4,17 @@ const router = express.Router()
 
 
 router.get('/register', userController.formRegister)
-router.get('/login', userController.formLogin)
-
 router.post('/register', userController.register)
+
+router.get('/login', userController.formLogin)
 router.post('/login', userController.login)
+
+router.get('/:id', userController.findOne)
+
+router.get('/:id/play', userController.playingMe)
+
+
+
 
 
 module.exports = router

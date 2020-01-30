@@ -120,7 +120,6 @@ class UserController {
                         return UserHero.create(payload)
                     })
                     .then(function(data) {
-                        console.log(heroGet)
                         res.render('getHeroPage', {heroGet, id : idUser})
                     })
                     .catch(function(err) {

@@ -1,5 +1,6 @@
-const { User, Hero, UserHero } = require('../models')
+const { User, Hero, UserHero, Question } = require('../models')
 const checkSuperHero = require('../helpers/checkSuperHero')
+const check = require('../helpers/check')
 
 class UserController {
     static formRegister(req, res) {
@@ -82,34 +83,79 @@ class UserController {
 
     static playingMe(req, res) {
         let id = req.params.id
-        res.render('pageToPlay', {id})
+        Question.findAll()
+        .then(function(questions) {
+            let index = Math.round(Math.random() * questions.length)
+            let question = questions[index].question
+            res.render('pageToPlay', {id, question})
+        })
+        .catch(function(err) {
+            res.send(err)
+        })
+        
     }
 
     static findHero(req, res) {
         let idUser = req.params.id
         let idHero = null
-        let numbers = req.body.number
+        let userAnswer = req.body.number
         let heroGet = ''
-        Hero.findAll()
-            .then(function(heroes) {
-                let id = checkSuperHero(numbers, heroes)
-                idHero = id
-                return Hero.findByPk(id)
-            })
-            .then(function(hero) {
-                heroGet = hero
-                let payload = {
-                    UserId : idUser,
-                    HeroId : idHero
+        
+        Question.findAll()
+            .then(function(questions) {
+                let statusQuestion = check(userAnswer, questions)
+                if (statusQuestion) {
+                    Hero.findAll()
+                    .then(function(heroes) {
+                        let id = checkSuperHero(heroes)
+                        idHero = id
+                        return Hero.findByPk(id)
+                    })
+                    .then(function(hero) {
+                        heroGet = hero
+                        let payload = {
+                            UserId : idUser,
+                            HeroId : idHero
+                        }
+                        return UserHero.create(payload)
+                    })
+                    .then(function(data) {
+                        res.render('getHeroPage', {heroGet})
+                    })
+                    .catch(function(err) {
+                        res.send(err)
+                    })
+                } else {
+                   res.render('getHeroPage', {heroGet:null}) 
                 }
-                return UserHero.create(payload)
-            })
-            .then(function(data) {
-                res.render('getHeroPage', {heroGet, idUser})
             })
             .catch(function(err) {
                 res.send(err)
             })
+        
+
+
+
+        // Hero.findAll()
+        //     .then(function(heroes) {
+        //         let id = checkSuperHero(numbers, heroes)
+        //         idHero = id
+        //         return Hero.findByPk(id)
+        //     })
+        //     .then(function(hero) {
+        //         heroGet = hero
+        //         let payload = {
+        //             UserId : idUser,
+        //             HeroId : idHero
+        //         }
+        //         return UserHero.create(payload)
+        //     })
+        //     .then(function(data) {
+        //         res.render('getHeroPage', {heroGet})
+        //     })
+        //     .catch(function(err) {
+        //         res.send(err)
+        //     })
     }
 
     static getAll(req, res) {

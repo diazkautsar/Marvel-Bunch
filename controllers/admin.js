@@ -115,14 +115,22 @@ class AdminController {
     static remove(req, res) {
         const heroId = req.params.heroId
         const adminId = req.params.adminId
-        Hero.destroy({where: {id: heroId}})
-            .then(data => {
-                res.redirect(`/admins/${adminId}/home`)
+
+        UserHero.destroy({
+            where : {HeroId : heroId}
+        })
+        .then(function(data) {
+            return Hero.destroy({
+                where : {id : heroId}
             })
-            .catch(err => {
-                const error = 'REMOVE FAILED'
-                res.redirect(`admins/${adminId}/home?msg=${error}`)
-            })
+        })
+        .then(data => {
+            res.redirect(`/admins/${adminId}/home`)
+        })
+        .catch(err => {
+            const error = 'REMOVE FAILED'
+            res.redirect(`admins/${adminId}/home?msg=${error}`)
+        })
     }
 
     static logout(req, res) {

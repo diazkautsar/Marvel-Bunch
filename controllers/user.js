@@ -99,7 +99,7 @@ class UserController {
         let idUser = req.params.id
         let idHero = null
         let userAnswer = req.body.number
-        let heroGet = ''
+        let heroGet = null
         
         Question.findAll()
             .then(function(questions) {
@@ -120,13 +120,14 @@ class UserController {
                         return UserHero.create(payload)
                     })
                     .then(function(data) {
-                        res.render('getHeroPage', {heroGet})
+                        console.log(heroGet)
+                        res.render('getHeroPage', {heroGet, id : idUser})
                     })
                     .catch(function(err) {
                         res.send(err)
                     })
                 } else {
-                   res.render('getHeroPage', {heroGet:null}) 
+                   res.render('getHeroPage', {heroGet, id: idUser}) 
                 }
             })
             .catch(function(err) {

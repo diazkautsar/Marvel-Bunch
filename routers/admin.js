@@ -15,4 +15,6 @@ router.post('/:adminId/:heroId/edit', Controller.editHero)
 
 router.get('/:adminId/:heroId/remove', Controller.remove)
 
+router.get('/:id/logout', Controller.logout)
+
 module.exports = router

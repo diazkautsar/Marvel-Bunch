@@ -45,6 +45,9 @@ class UserController {
             .then(data => {
                 // res.send(heroes)
                 if (data.length === 1) {
+                    req.session.isLogin = true
+                    req.session.iduser = data[0].id
+                    req.session.data = data[0].id
                     res.redirect(`/users/${data[0].id}`)
                     // res.render('userPage', {heroes})
                 } else {
@@ -71,7 +74,7 @@ class UserController {
                 })
             })
             .then(function(heroes) {
-                res.render('userPage', {dataUser, heroes})
+                res.render('userPage', {dataUser, heroes, id})
             })
             .catch(function(err) {
                 res.send(err)
@@ -170,7 +173,7 @@ class UserController {
             })
             .then(function(heroes) {
                 console.log(heroes)
-                res.render('usersListHeroes', {dataUser, heroes})
+                res.render('usersListHeroes', {dataUser, heroes, id})
             })
             .catch(function(err) {
                 res.send(err)
@@ -186,6 +189,11 @@ class UserController {
         .then(function(data) {
             res.redirect(`/users/${idUser}/list`)
         })
+    }
+
+    static logout(req, res) {
+        req.session.isLogin = false
+        res.redirect('/')
     }
 }
 

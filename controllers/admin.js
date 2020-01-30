@@ -20,6 +20,7 @@ class AdminController {
             .then(data => {
                 if (data.length === 1) {
                     // res.send('login berhasil')
+                    req.session.isLogin = true
                     res.redirect(`/admins/${data[0].id}/home`)
                 } else {
                     // res.send('username/password salah')
@@ -130,6 +131,11 @@ class AdminController {
             const error = 'REMOVE FAILED'
             res.redirect(`admins/${adminId}/home?msg=${error}`)
         })
+    }
+
+    static logout(req, res) {
+        req.session.isLogin = false
+        res.redirect('/')
     }
 }
 

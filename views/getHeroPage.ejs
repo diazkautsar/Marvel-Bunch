@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+    <%- include('./partials/head.ejs', {data: 'MARVEL BUNCH'}) %>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">DH</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/users/<%= id %>">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/users/<%= idUser %>/list">List <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/users/<%= idUser %>/logout">Logout<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <center>
+        <h2>Selamat Anda Mendapatkan <%= heroGet.name %></h2>
+        <img src="<%= heroGet.link_image %>"><br>
+    </center>
     <% if (heroGet) { %>
         <center>
             <h2>Selamat Anda Mendapatkan <%= heroGet.name %></h2>
@@ -18,7 +38,6 @@
             <h3>Balik Lagi Ke FASE 0</h3>
         </center>
     <% } %>
-    
     
 </body>
 </html>

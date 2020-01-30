@@ -6,7 +6,15 @@ module.exports = (sequelize, DataTypes) => {
 
   Hero.init({
     name: DataTypes.STRING,
-    link_image: DataTypes.STRING
+    link_image: {
+      type: DataTypes.STRING,
+      validate: {
+        isUrl: {
+          args: true,
+          msg: 'URL SALAH'
+        }
+      }
+    }
   }, {
     sequelize
   })

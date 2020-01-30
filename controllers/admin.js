@@ -104,7 +104,7 @@ class AdminController {
         })
             .then(data => {
                 const msg = `sukses edit hero: ${payload.name}`
-                res.redirect(`/admins/${id}/home?msg=${msg}`)
+                res.redirect(`/admins/${adminId}/home?msg=${msg}`)
             })
             .catch(err => {
                 const error = err.errors[0].message

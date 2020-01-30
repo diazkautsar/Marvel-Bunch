@@ -1,4 +1,5 @@
 const { User, Hero, UserHero } = require('../models')
+const checkSuperHero = require('../helpers/checkSuperHero')
 
 class UserController {
     static formRegister(req, res) {
@@ -53,7 +54,6 @@ class UserController {
             .catch(err => {
                 res.send(err)
             })
-
     }
 
     static findOne(req, res) {
@@ -71,7 +71,6 @@ class UserController {
             })
             .then(function(heroes) {
                 res.render('userPage', {dataUser, heroes})
-                // res.send({user : dataUser, heroes : heroes})
             })
             .catch(function(err) {
                 res.send(err)
@@ -79,7 +78,35 @@ class UserController {
     }
 
     static playingMe(req, res) {
-        res.render('pageToPlay')
+        let id = req.params.id
+        res.render('pageToPlay', {id})
+    }
+
+    static findHero(req, res) {
+        let idUser = req.params.id
+        let idHero = null
+        let numbers = req.body.number
+        let heroGet = ''
+        Hero.findAll()
+            .then(function(heroes) {
+                let id = checkSuperHero(numbers, heroes)
+                idHero = id
+                return Hero.findByPk(id)
+            })
+            .then(function(hero) {
+                heroGet = hero
+                let payload = {
+                    UserId : idUser,
+                    HeroId : idHero
+                }
+                return UserHero.create(payload)
+            })
+            .then(function(data) {
+                res.render('getHeroPage', {heroGet})
+            })
+            .catch(function(err) {
+                res.send(err)
+            })
     }
 }
 

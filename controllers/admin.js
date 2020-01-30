@@ -82,7 +82,6 @@ class AdminController {
         const errorText = req.query.err
         Hero.findByPk(heroId)
             .then(data => {
-                // res.send(data)
                 res.render('edithero.ejs', { data, adminId, errorText })
             })
             .catch(err => {

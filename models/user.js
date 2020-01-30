@@ -6,8 +6,54 @@ module.exports = (sequelize, DataTypes) => {
   
   User.init({
     name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    username: DataTypes.STRING,
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+        isEmail: {
+          args: true,
+          msg: "format email yang anda masukan salah"
+        },
+        checkEmail(value, next) {
+          User.findAll({
+            where:{
+              email: value
+            }
+          })
+            .then(users => {
+              if (users.length > 0) {
+                next('email sudah terdaftar')
+              } else {
+                next()
+              }
+            })
+            .catch(err => {
+              next(err)
+            })
+        }
+      }
+    },
+    username: {
+      type: DataTypes.STRING,
+      validate: {
+        checkUsername(value, next) {
+          User.findAll({
+            where: {
+              username: value
+            }
+          })
+            .then(users => {
+              if (users.length > 0) {
+                next('username telah terdaftar')
+              } else {
+                next()
+              }
+            })
+            .catch(err => {
+              next(err)
+            })
+        }
+      }
+    },
     password: DataTypes.STRING
   }, {
     sequelize

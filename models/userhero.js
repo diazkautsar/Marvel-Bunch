@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
 
   UserHero.associate = function(models) {
     // associations can be defined here
+    UserHero.belongsTo(models.Hero)
   };
   return UserHero;
 };

@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     Hero.belongsToMany(models.User, {
       through: models.UserHero
     })
+    Hero.hasMany(models.UserHero)
   };
   return Hero;
 };

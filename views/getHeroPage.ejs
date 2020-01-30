@@ -15,18 +15,15 @@
                     <a class="nav-link" href="/users/<%= id %>">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/users/<%= idUser %>/list">List <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/users/<%= id %>/list">List <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/users/<%= idUser %>/logout">Logout<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/users/<%= id %>/logout">Logout<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>
     </nav>
-    <center>
-        <h2>Selamat Anda Mendapatkan <%= heroGet.name %></h2>
-        <img src="<%= heroGet.link_image %>"><br>
-    </center>
+
     <% if (heroGet) { %>
         <center>
             <h2>Selamat Anda Mendapatkan <%= heroGet.name %></h2>

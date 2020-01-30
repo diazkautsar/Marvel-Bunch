@@ -41,9 +41,10 @@ class UserController {
             }
         })
             .then(data => {
-                // res.send(data)
+                // res.send(heroes)
                 if (data.length === 1) {
                     res.redirect(`/users/${data[0].id}`)
+                    // res.render('userPage', {heroes})
                 } else {
                     const msg = 'username/password salah'
                     res.redirect(`/users/login?msg=${msg}`)

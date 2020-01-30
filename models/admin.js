@@ -1,4 +1,6 @@
 'use strict';
+const hashPassword = require('../helpers/hashPassword')
+
 module.exports = (sequelize, DataTypes) => {
   const Model = sequelize.Sequelize.Model
 

@@ -6,15 +6,15 @@ function notif(value) {
         service: 'gmail',
         auth: {
             user: 'keperluanlainlain77@gmail.com',
-            pass: ''
+            pass: '77karzai'
         }
     })
 
     const mailOptions = {
         from: 'keperluanlainlain77@gmail.com',
         to: value,
-        subject: 'selamat anda telah berhasil membuat akun di Marvel Bunch',
-        html: '<p>mantap<p>'
+        subject: 'MARVEL BUNCH',
+        text: 'makasih yah udah daftar. aku seneng deh kamu daftar'
     }
 
     transporter.sendMail(mailOptions, (err, info) => {

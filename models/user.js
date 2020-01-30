@@ -1,5 +1,6 @@
 'use strict';
-const notificationEmail = require('../helpers/notificationemail')
+const hashPassword = require('../helpers/hashPassword')
+const notifEmail = require('../helpers/notificationemail')
 
 module.exports = (sequelize, DataTypes) => {
   const Model = sequelize.Sequelize.Model
@@ -60,9 +61,12 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     hooks: {
-      afterCreate: (user, options) => {
+      beforeCreate: (user, options) => {
         // console.log(user)
-        notificationEmail(user.email)
+        user.password = hashPassword(user.password)
+      },
+      afterCreate: (user, options) => {
+        notifEmail(user.email)
       }
     }
   })

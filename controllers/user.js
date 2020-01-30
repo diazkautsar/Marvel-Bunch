@@ -1,5 +1,6 @@
 const { User, Hero, UserHero, Question } = require('../models')
 const checkSuperHero = require('../helpers/checkSuperHero')
+const checkPassword = require('../helpers/checkPassword')
 const check = require('../helpers/check')
 
 class UserController {
@@ -38,13 +39,13 @@ class UserController {
         }
         User.findAll({
             where: {
-                username: payload.username,
-                password: payload.password
+                username: payload.username
             }
         })
             .then(data => {
                 // res.send(heroes)
-                if (data.length === 1) {
+                const isValid = checkPassword(payload.password, data[0].password)
+                if (data.length === 1 && isValid === true) {
                     req.session.isLogin = true
                     req.session.iduser = data[0].id
                     req.session.data = data[0].id
@@ -85,7 +86,7 @@ class UserController {
         let id = req.params.id
         Question.findAll()
         .then(function(questions) {
-            let index = Math.round(Math.random() * questions.length)
+            let index = Math.floor(Math.random() * questions.length)
             let question = questions[index].question
             res.render('pageToPlay', {id, question})
         })
@@ -132,30 +133,6 @@ class UserController {
             .catch(function(err) {
                 res.send(err)
             })
-        
-
-
-
-        // Hero.findAll()
-        //     .then(function(heroes) {
-        //         let id = checkSuperHero(numbers, heroes)
-        //         idHero = id
-        //         return Hero.findByPk(id)
-        //     })
-        //     .then(function(hero) {
-        //         heroGet = hero
-        //         let payload = {
-        //             UserId : idUser,
-        //             HeroId : idHero
-        //         }
-        //         return UserHero.create(payload)
-        //     })
-        //     .then(function(data) {
-        //         res.render('getHeroPage', {heroGet})
-        //     })
-        //     .catch(function(err) {
-        //         res.send(err)
-        //     })
     }
 
     static getAll(req, res) {
@@ -168,11 +145,11 @@ class UserController {
                     include : [ Hero ],
                     where : {
                         UserId : id
-                    }
+                    }, 
+                    attributes : ['id', 'UserId', 'HeroId']
                 })
             })
             .then(function(heroes) {
-                console.log(heroes)
                 res.render('usersListHeroes', {dataUser, heroes, id})
             })
             .catch(function(err) {
@@ -182,9 +159,9 @@ class UserController {
 
     static removeHero(req, res) {
         let idUser = req.params.idUser
-        let idHero = req.params.idHero
+        let id = req.params.idUserHero
         UserHero.destroy({
-            where : {HeroId : idHero}
+            where : {id : id}
         })
         .then(function(data) {
             res.redirect(`/users/${idUser}/list`)

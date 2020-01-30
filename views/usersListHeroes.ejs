@@ -44,7 +44,7 @@
                         <td> <%= data.Hero.name %> </td>
                         <td> <img src="<%= data.Hero.link_image %>" style="width: 100px; height: 100px;"> </td>
                         <td>
-                            <a href="/users/<%= dataUser.id %>/<%= data.Hero.id %>/remove" onclick="return confirm('Are You Sure Remove This Hero')" >Remove</a>
+                            <a href="/users/<%= dataUser.id %>/<%= data.id %>/remove" onclick="return confirm('Are You Sure Remove This Hero')" >Remove</a>
                         </td>
                     </tr>
                 <% }) %>

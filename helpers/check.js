@@ -1,13 +1,24 @@
 function check(userAnswer, questions) {
-    let answerUser = userAnswer.join('')
-    for (let i = 0; i < questions.length; i++) {
-        
-        console.log(questions[i].answer, answerUser)
-        if (questions[i].answer === answerUser) {
-            return true
+
+    if (Array.isArray(userAnswer)) {
+        let answerUser = userAnswer.join('')
+        for (let i = 0; i < questions.length; i++) {
+            
+            if (questions[i].answer === answerUser) {
+                return true
+            }
         }
+        return false
+    } else {
+        for (let i = 0; i < questions.length; i++) {
+            
+            if (questions[i].answer === userAnswer) {
+                return true
+            }
+        }
+        return false
     }
-    return false
+    
 }
 
 module.exports = check

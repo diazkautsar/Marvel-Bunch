@@ -18,7 +18,7 @@ router.post('/:id/play', userController.findHero)
 
 router.get('/:id/list', userController.getAll)
 
-router.get('/:idUser/:idHero/remove', userController.removeHero)
+router.get('/:idUser/:idUserHero/remove', userController.removeHero)
 
 router.get('/:id/logout', userController.logout)
 

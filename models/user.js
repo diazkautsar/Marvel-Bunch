@@ -1,4 +1,6 @@
 'use strict';
+const notificationEmail = require('../helpers/notificationemail')
+
 module.exports = (sequelize, DataTypes) => {
   const Model = sequelize.Sequelize.Model
 
@@ -56,7 +58,13 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: DataTypes.STRING
   }, {
-    sequelize
+    sequelize,
+    hooks: {
+      afterCreate: (user, options) => {
+        // console.log(user)
+        notificationEmail(user.email)
+      }
+    }
   })
 
   User.associate = function(models) {

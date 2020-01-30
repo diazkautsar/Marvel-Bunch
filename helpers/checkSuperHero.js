@@ -1,8 +1,5 @@
-function checkSuperHero(numbers, heroes) {
-    let totalPoint = 0
-    numbers.forEach(data => {
-        totalPoint += Number(data)
-    })
+function checkSuperHero(heroes) {
+    let totalPoint = Math.floor(Math.random() * 465)
 
     let totalHeroes = heroes.length
 

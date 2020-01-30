@@ -7,10 +7,18 @@
     <title>Document</title>
 </head>
 <body>
-    <center>
-        <h2>Selamat Anda Mendapatkan <%= heroGet.name %></h2>
-        <img src="<%= heroGet.link_image %>"><br>
-    </center>
+    <% if (heroGet) { %>
+        <center>
+            <h2>Selamat Anda Mendapatkan <%= heroGet.name %></h2>
+            <img src="<%= heroGet.link_image %>"><br>
+        </center>
+    <% } else  { %>
+        <center>
+            <h2>Maaf Anda Kurang Pintar %></h2>
+            <h3>Balik Lagi Ke FASE 0</h3>
+        </center>
+    <% } %>
+    
     
 </body>
 </html>

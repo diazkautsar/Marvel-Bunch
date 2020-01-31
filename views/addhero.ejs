@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs', {data: 'MARVEL BUNCH'}) %>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">DH</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/admins/<%= id %>/home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/admins/<%= id %>/logout">Logout<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <center>
+        <% if (err) { %>
+            <h1> <%= err %> </h1>
+        <% } else { %>
+            <h1></h1>
+        <% }  %> 
+
+        <form action="/admins/<%= id %>/add" method="post">
+            <label>Hero Name</label><br>
+            <input type="text" name="name", required><br>
+            <br>
+            <label>Link Image</label><br>
+            <textarea name="link", rows="5", cols="50"></textarea><br>
+            <br>
+            <input type="submit" value="ADD HERO">
+        </form>
+    </center>
+</body>
+</html>

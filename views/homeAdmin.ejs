@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head.ejs', {data: 'MARVEL BUNCH'}) %>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">DH</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/admins/<%= admin.id %>/home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/admins/<%= admin.id %>/logout">Logout<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <center>
+        <table>
+            <thead>
+                <tr>
+                    <th>HERO ID</th>
+                    <th>HERO NAME</th>
+                    <th>IMAGE</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                <h1>Welcome admin <%= admin.name %> </h1>
+                <h2>Nice To Meet You again</h2>
+                <a href="/admins/<%= admin.id %>/add">Add Hero</a>
+
+                <% if (message) { %>
+                    <h3 style="color: red;"> <%= message %> </h3>
+                <% } else { %>
+                    <h3></h3>
+                <% } %> 
+
+                <% for (let i in data) { %>
+                    <tr>
+                        <td> <%= data[i].id %> </td>
+                        <td> <%= data[i].name %> </td>
+                        <td> <img src="<%= data[i].link_image %>" style="width: 100px; height: 100px;"> </td>
+                        <td>
+                            <a href="/admins/<%= admin.id %>/<%= data[i].id %>/edit/">Edit</a>
+                            <a href="/admins/<%= admin.id %>/<%= data[i].id %>/remove/" onclick="return confirm('Are You Sure Remove This Hero')" >Remove</a>
+                        </td>
+                    </tr>
+                <% }  %> 
+            </tbody>
+        </table>
+    </center>
+</body>
+</html>

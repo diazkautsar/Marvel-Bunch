@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs', {data: 'MARVEL BUNCH'}) %>
+<body>
+    <%- include('./partials/navbar.ejs') %>
+    <center>
+    <h1>WELCOME TO MARVEL BUNCH GAME</h1>
+    <h2> <a href="/users/:id/play"> Lets Play</a> </h2>
+
+    <% if (msg) { %>
+        <h3> <%= msg %> </h3>
+        <h4>
+            <a href="/users/<%= msg[0] %>/logout">LOGOUT</a> 
+        </h4>
+    <% } else { %>
+        <h1></h1>
+    <% } %>
+
+    </center>
+</body>
+</html>

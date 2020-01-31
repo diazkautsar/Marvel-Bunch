@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs', {data: 'MARVEL BUNCH'}) %>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">DH</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/users/<%= id %>">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/users/<%= id %>/list">List <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/users/<%= id %>/logout">Logout<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <center>
+        <h1>Mari Temukan Pola untuk mendapatkan Jagoaan Favorit mu</h1>
+        <div>
+            <h3><%= question %></h3>
+        </div>
+        
+        <form action="/users/<%= id %>/play" method="POST">
+            <input type="checkbox" name="number" value="A">
+            <input type="checkbox" name="number" value="B">
+            <input type="checkbox" name="number" value="C">
+            <input type="checkbox" name="number" value="D">
+            <input type="checkbox" name="number" value="E">
+            <input type="checkbox" name="number" value="F"><br>
+            <input type="checkbox" name="number" value="G">
+            <input type="checkbox" name="number" value="H">
+            <input type="checkbox" name="number" value="I">
+            <input type="checkbox" name="number" value="J">
+            <input type="checkbox" name="number" value="K">
+            <input type="checkbox" name="number" value="L"><br>
+            <input type="checkbox" name="number" value="M">
+            <input type="checkbox" name="number" value="N">
+            <input type="checkbox" name="number" value="O">
+            <input type="checkbox" name="number" value="P">
+            <input type="checkbox" name="number" value="Q">
+            <input type="checkbox" name="number" value="R"><br>
+            <input type="checkbox" name="number" value="S">
+            <input type="checkbox" name="number" value="T">
+            <input type="checkbox" name="number" value="U">
+            <input type="checkbox" name="number" value="V">
+            <input type="checkbox" name="number" value="W">
+            <input type="checkbox" name="number" value="X"><br>
+            <input type="checkbox" name="number" value="Y">
+            <input type="checkbox" name="number" value="Z">
+            <input type="checkbox" name="number" value="1">
+            <input type="checkbox" name="number" value="2">
+            <input type="checkbox" name="number" value="3">
+            <input type="checkbox" name="number" value="4"><br>
+            <input type="checkbox" name="number" value="5">
+            <input type="checkbox" name="number" value="6">
+            <input type="checkbox" name="number" value="7">
+            <input type="checkbox" name="number" value="8">
+            <input type="checkbox" name="number" value="9">
+            <input type="checkbox" name="number" value="10"><br>
+            <input type="checkbox" name="number" value="11">
+            <input type="checkbox" name="number" value="12">
+            <input type="checkbox" name="number" value="13">
+            <input type="checkbox" name="number" value="14">
+            <input type="checkbox" name="number" value="15">
+            <input type="checkbox" name="number" value="16"><br>
+            <br>
+            <button type="submit">Sudah Yakin Nih?</button>
+        </form>
+    </center>
+
+    
+</body>
+</html>
